@@ -38,6 +38,23 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DONATIONS_COLUMN_CONTACT_ID     = "contact_id";
     public static final String DONATIONS_COLUMN_AMOUNT_DONATED = "amount_donated";
 
+    // The table "donators"
+    public static final String DONATORS_TABLE_NAME    = "donators";
+    public static final String DONATORS_COLUMN_ID     = "id";
+    public static final String DONATORS_COLUMN_NAME   = "name";
+    public static final String DONATORS_COLUMN_EMAIL  = "email";
+    public static final String DONATORS_COLUMN_STREET = "street";
+    public static final String DONATORS_COLUMN_CITY   = "place";
+    public static final String DONATORS_COLUMN_PHONE  = "phone";
+
+    // The table "amountsDonated"
+    public static final String AMOUNTSDONATED_TABLE_NAME   = "amountsDonated";
+    public static final String AMOUNTSDONATED_COLUMN_ID    = "id";
+    public static final String AMOUNTSDONATED_COLUMN_DONATOR_ID    = "donator_id";
+    public static final String AMOUNTSDONATED_COLUMN_DATE  = "date";
+    public static final String AMOUNTSDONATED_COLUMN_AMOUNT_DONATED = "amount_donated";
+
+
 
     static int ver = 1;
 
@@ -57,7 +74,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        // Creating the tables - Here I will create just one table called "contacts"
+        // Creating the contacts table
         db.execSQL(
                 "create table " +  CONTACTS_TABLE_NAME + "(" +
                         CONTACTS_COLUMN_ID + " integer primary key, " +
@@ -66,6 +83,17 @@ public class DBHelper extends SQLiteOpenHelper {
                         CONTACTS_COLUMN_EMAIL  + " text, " +
                         CONTACTS_COLUMN_STREET + " text, " +
                         CONTACTS_COLUMN_CITY   + " text)"
+        );
+
+        // Creating donators table
+        db.execSQL(
+                "create table " +  DONATORS_TABLE_NAME + "(" +
+                        DONATORS_COLUMN_ID + " integer primary key, " +
+                        DONATORS_COLUMN_NAME   + " text, " +
+                        DONATORS_COLUMN_PHONE  + " text, " +
+                        DONATORS_COLUMN_EMAIL  + " text, " +
+                        DONATORS_COLUMN_STREET + " text, " +
+                        DONATORS_COLUMN_CITY   + " text)"
         );
 
         // Foreign key should be at the last in the query
@@ -77,6 +105,15 @@ public class DBHelper extends SQLiteOpenHelper {
                         CONTACTS_TABLE_NAME + "(" +  CONTACTS_COLUMN_ID + "))"
         );
 
+        // Creating amountsDonated table FK
+        db.execSQL(
+                "create table " +  AMOUNTSDONATED_TABLE_NAME + "(" +
+                        AMOUNTSDONATED_COLUMN_ID + " integer primary key, " +
+                        AMOUNTSDONATED_COLUMN_DATE   + " date, " +
+                        AMOUNTSDONATED_COLUMN_AMOUNT_DONATED  + " real," +
+                        AMOUNTSDONATED_COLUMN_DONATOR_ID + " integer,  FOREIGN KEY (" +  AMOUNTSDONATED_COLUMN_DONATOR_ID + ") REFERENCES " +
+                        DONATORS_TABLE_NAME + "(" +  DONATORS_COLUMN_ID + "))"
+        );
     }
 
     /**
@@ -93,6 +130,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS " + CONTACTS_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + DONATIONS_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + DONATORS_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + AMOUNTSDONATED_TABLE_NAME);
         onCreate(db);
     }
 
@@ -120,6 +159,33 @@ public class DBHelper extends SQLiteOpenHelper {
 
         // Insert the row
         db.insert("contacts", null, contentValues);
+        return true;
+    }
+
+    /**
+     * Insert a row (a new donator) into the donators table
+     * @param name
+     * @param phone
+     * @param email
+     * @param street
+     * @param place
+     * @return
+     */
+    public boolean insertDonator  (String name, String phone, String email, String street, String place)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Prepare the row to insert
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("name", name);
+        contentValues.put("phone", phone);
+        contentValues.put("email", email);
+        contentValues.put("street", street);
+        contentValues.put("place", place);
+
+        // Insert the row
+        db.insert("donators", null, contentValues);
         return true;
     }
 
