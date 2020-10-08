@@ -18,4 +18,6 @@
     <string name="no">No</string>
 
     <string name="new_button">New contact</string>
+    <string name="donate">donate</string>
+    <string name="back">back</string>
 </resources>
