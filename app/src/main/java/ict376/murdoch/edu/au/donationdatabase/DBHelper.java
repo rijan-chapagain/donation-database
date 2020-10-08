@@ -20,7 +20,7 @@ import 	android.util.Pair;
 public class DBHelper extends SQLiteOpenHelper {
 
     // The database name
-    public static final String DATABASE_NAME = "DonationsDatabase.db";
+    public static final String DATABASE_NAME = "NewDonationsDatabase.db";
 
     // The table "donators"
     public static final String DONATORS_TABLE_NAME    = "donators";
