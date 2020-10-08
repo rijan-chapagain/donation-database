@@ -125,11 +125,11 @@ public  class ContactDetailsFragment extends Fragment {
             id_To_Update = Value;
             rs.moveToFirst();
 
-            String nam   = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_NAME));
-            String phon  = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_PHONE));
-            String emai  = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_EMAIL));
-            String stree = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_STREET));
-            String plac  = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_CITY));
+            String nam   = rs.getString(rs.getColumnIndex(DBHelper.DONATORS_COLUMN_NAME));
+            String phon  = rs.getString(rs.getColumnIndex(DBHelper.DONATORS_COLUMN_PHONE));
+            String emai  = rs.getString(rs.getColumnIndex(DBHelper.DONATORS_COLUMN_EMAIL));
+            String stree = rs.getString(rs.getColumnIndex(DBHelper.DONATORS_COLUMN_STREET));
+            String plac  = rs.getString(rs.getColumnIndex(DBHelper.DONATORS_COLUMN_CITY));
 
             if (!rs.isClosed()) {
                 rs.close();
@@ -219,7 +219,7 @@ public  class ContactDetailsFragment extends Fragment {
         builder.setMessage(R.string.deleteContact)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        mydb.deleteContact(id_To_Update);
+                        mydb.deleteDonator(id_To_Update);
                         Toast.makeText(getActivity().getApplicationContext(), "Deleted Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
                         startActivity(intent);  // back to main activity
@@ -272,7 +272,7 @@ public  class ContactDetailsFragment extends Fragment {
         if(Value>0){
 
             // Updating a contact
-            if(mydb.updateContact(id_To_Update,name.getText().toString(), phone.getText().toString(), email.getText().toString(), street.getText().toString(), place.getText().toString())){
+            if(mydb.updateDonator(id_To_Update,name.getText().toString(), phone.getText().toString(), email.getText().toString(), street.getText().toString(), place.getText().toString())){
                 Toast.makeText(getActivity().getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
                 // Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
                 //startActivity(intent);
@@ -283,7 +283,7 @@ public  class ContactDetailsFragment extends Fragment {
         }
         else{
             // inserting a new contact
-            if(mydb.insertContact(name.getText().toString(), phone.getText().toString(), email.getText().toString(), street.getText().toString(), place.getText().toString())){
+            if(mydb.insertDonator(name.getText().toString(), phone.getText().toString(), email.getText().toString(), street.getText().toString(), place.getText().toString())){
                 Toast.makeText(getActivity().getApplicationContext(), "Contact inserted!", Toast.LENGTH_SHORT).show();
 
                 // disable inserting  the same contact again
