@@ -7,25 +7,12 @@ package ict376.murdoch.edu.au.donationdatabase;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
-import android.app.Activity;
-import android.app.AlertDialog;
-
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
 
 import android.support.annotation.RequiresApi;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+public class DisplayDonator extends Activity {
 
-public class DisplayContact extends Activity {
-
-    ContactDetailsFragment contactDetailsFragment;
+    DonatorDetailsFragment donatorDetailsFragment;
 
     @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -40,10 +27,10 @@ public class DisplayContact extends Activity {
             ix = extras.getInt("id", -1);
 
         if (savedInstanceState == null) {
-            contactDetailsFragment = ContactDetailsFragment.newInstance(ix);
-            getFragmentManager().beginTransaction().add(R.id.contactdetails_fragment_container, contactDetailsFragment).commit();
+            donatorDetailsFragment = DonatorDetailsFragment.newInstance(ix);
+            getFragmentManager().beginTransaction().add(R.id.donatordetails_fragment_container, donatorDetailsFragment).commit();
         }else{
-            contactDetailsFragment = (ContactDetailsFragment)getFragmentManager().findFragmentById(R.id.contactdetails_fragment_container);
+            donatorDetailsFragment = (DonatorDetailsFragment)getFragmentManager().findFragmentById(R.id.donatordetails_fragment_container);
         }
 
 
@@ -52,20 +39,20 @@ public class DisplayContact extends Activity {
     /*
     public void onDeleteContactClick(View v){
 
-        contactDetailsFragment.onDeleteContactClick(v);
+        donatorDetailsFragment.onDeleteContactClick(v);
 
 
     }
 
     public void onEditContactClick(View v){
 
-        contactDetailsFragment.onEditContactClick(v);
+        donatorDetailsFragment.onEditContactClick(v);
 
     }
 
     public void run(View view)    {
 
-        contactDetailsFragment.run(view);
+        donatorDetailsFragment.run(view);
 
         //Intent intent = new Intent(getApplicationContext(),MainActivity.class);
         //startActivity(intent);
