@@ -8,7 +8,7 @@ import android.support.annotation.RequiresApi;
 
 public class MainActivity extends Activity{//AppCompatActivity {
 
-    ContactListFragment contactListFragment;
+    DonatorListFragment donatorListFragment;
 
     @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -17,10 +17,10 @@ public class MainActivity extends Activity{//AppCompatActivity {
         setContentView(R.layout.activity_layout);
 
         if (savedInstanceState == null) {
-            contactListFragment = ContactListFragment.newInstance();
-            getFragmentManager().beginTransaction().add(R.id.contactlist_fragment_container, contactListFragment).commit();
+            donatorListFragment = DonatorListFragment.newInstance();
+            getFragmentManager().beginTransaction().add(R.id.donatorlist_fragment_container, donatorListFragment).commit();
         }else{
-            contactListFragment = (ContactListFragment)getFragmentManager().findFragmentById(R.id.contactlist_fragment_container);
+            donatorListFragment = (DonatorListFragment)getFragmentManager().findFragmentById(R.id.donatorlist_fragment_container);
         }
     }
 

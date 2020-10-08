@@ -174,7 +174,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * Get the list of all donators
      * @return
      */
-    public ArrayList<Pair<Integer, String>> getAllContacts()
+    public ArrayList<Pair<Integer, String>> getAllDonators()
     {
         ArrayList<Pair<Integer, String>> array_list = new ArrayList<Pair<Integer, String>>();
 
@@ -207,7 +207,7 @@ public class DBHelper extends SQLiteOpenHelper {
         /*
         Cursor res =  db.rawQuery( "select " + DONATORS_TABLE_NAME + ".*, sum(" + DONATIONS_TABLE_NAME + "." + DONATIONS_COLUMN_AMOUNT_DONATED + ") " +
                                     "from " +  DONATORS_TABLE_NAME + ", " + DONATIONS_TABLE_NAME + " " +
-                                    "where " + DONATORS_TABLE_NAME + "." + DONATORS_COLUMN_ID + "=" + id  + " and " + DONATIONS_TABLE_NAME +  "." + DONATIONS_COLUMN_CONTACT_ID + " = " + id, null );
+                                    "where " + DONATORS_TABLE_NAME + "." + DONATORS_COLUMN_ID + "=" + id  + " and " + DONATIONS_TABLE_NAME +  "." + DONATIONS_COLUMN_DONATOR_ID + " = " + id, null );
 
         */
 

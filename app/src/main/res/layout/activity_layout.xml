@@ -16,7 +16,7 @@
 
 
     <FrameLayout
-        android:id="@+id/contactlist_fragment_container"
+        android:id="@+id/donatorlist_fragment_container"
         android:layout_width="368dp"
         android:layout_height="495dp"
         android:layout_below="@+id/textView"

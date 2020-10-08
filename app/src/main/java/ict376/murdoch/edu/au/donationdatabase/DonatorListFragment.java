@@ -18,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import 	android.util.Pair;
@@ -28,10 +27,10 @@ import 	android.util.Pair;
  */
 
 @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
-public class ContactListFragment extends Fragment {
+public class DonatorListFragment extends Fragment {
 
     public final static String EXTRA_MESSAGE = "MESSAGE";
-    public final static int REQUEST_CODE_NEW_CONTACT = 1;
+    public final static int REQUEST_CODE_NEW_DONATOR = 1;
 
 
     // Views
@@ -42,11 +41,11 @@ public class ContactListFragment extends Fragment {
 
     // Database
     DBHelper mydb = null;
-    ArrayList mArrayList;  // the list of all contacts
+    ArrayList mArrayList;  // the list of all donators
 
-    public static ContactListFragment newInstance(){
+    public static DonatorListFragment newInstance(){
 
-        ContactListFragment f = new ContactListFragment();
+        DonatorListFragment f = new DonatorListFragment();
         return f;
     }
 
@@ -54,7 +53,7 @@ public class ContactListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mLayoutView = inflater.inflate(R.layout.contact_list_layout, null);
+        mLayoutView = inflater.inflate(R.layout.donator_list_layout, null);
         return mLayoutView;
     }
 
@@ -78,18 +77,18 @@ public class ContactListFragment extends Fragment {
                 int id_To_Search = p.first; // position + 1;
 
                 // Check whether the details frame is visible
-                View detailsFrame = getActivity().findViewById(R.id.contactdetails_fragment_container);
+                View detailsFrame = getActivity().findViewById(R.id.donatordetails_fragment_container);
                 mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 
                 if (mDualPane) {
 
                     // display on the same Activity
-                    ContactDetailsFragment details = ContactDetailsFragment.newInstance(id_To_Search);
+                    DonatorDetailsFragment details = DonatorDetailsFragment.newInstance(id_To_Search);
 
                     // Execute a transaction, replacing any existing fragment
                     // with this one inside the frame.
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.replace(R.id.contactdetails_fragment_container, details);
+                    ft.replace(R.id.donatordetails_fragment_container, details);
 
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     ft.commit();
@@ -98,9 +97,9 @@ public class ContactListFragment extends Fragment {
                     Bundle dataBundle = new Bundle();
 
                     dataBundle.putInt("id", id_To_Search);
-                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayContact.class);
+                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonator.class);
                     intent.putExtras(dataBundle);
-                    startActivityForResult(intent, REQUEST_CODE_NEW_CONTACT);
+                    startActivityForResult(intent, REQUEST_CODE_NEW_DONATOR);
                 }
             }
         });
@@ -113,18 +112,18 @@ public class ContactListFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                View detailsFrame = getActivity().findViewById(R.id.contactdetails_fragment_container);
+                View detailsFrame = getActivity().findViewById(R.id.donatordetails_fragment_container);
                 mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 
                 if (mDualPane) {
 
                     // display on the same Activity
-                    ContactDetailsFragment details = ContactDetailsFragment.newInstance(0);
+                    DonatorDetailsFragment details = DonatorDetailsFragment.newInstance(0);
 
                     // Execute a transaction, replacing any existing fragment
                     // with this one inside the frame.
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.replace(R.id.contactdetails_fragment_container, details);
+                    ft.replace(R.id.donatordetails_fragment_container, details);
 
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     ft.commit();
@@ -134,7 +133,7 @@ public class ContactListFragment extends Fragment {
                     Bundle dataBundle = new Bundle();
                     dataBundle.putInt("id", 0);
 
-                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayContact.class);
+                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonator.class);
                     intent.putExtras(dataBundle);   //
 
                     startActivity(intent);          //
@@ -160,8 +159,8 @@ public class ContactListFragment extends Fragment {
         if (mydb == null)
             mydb = new DBHelper(getActivity());
 
-        // Get all the contacts from the database
-        mArrayList = mydb.getAllContacts();
+        // Get all the donators from the database
+        mArrayList = mydb.getAllDonators();
 
         ArrayList<String> array_list = new  ArrayList<String>();
 
@@ -169,17 +168,17 @@ public class ContactListFragment extends Fragment {
             Pair<Integer, String> p = (Pair<Integer, String>)mArrayList.get(i);
             array_list.add(p.second);
         }
-        // Put all the contacts in an array
+        // Put all the donators in an array
         ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, array_list);
 
-        // Display the contacts in the ListView object
+        // Display the donators in the ListView object
         obj = (ListView)mLayoutView.findViewById(R.id.listView1);
         obj.setAdapter(arrayAdapter);
 
         // Check the orientation of the display
         //mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 
-        View detailsFrame = getActivity().findViewById(R.id.contactdetails_fragment_container);
+        View detailsFrame = getActivity().findViewById(R.id.donatordetails_fragment_container);
         mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 
     }

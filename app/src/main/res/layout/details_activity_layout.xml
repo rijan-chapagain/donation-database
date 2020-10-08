@@ -17,7 +17,7 @@
         tools:ignore="NotSibling" />
 
 
-    <FrameLayout android:id="@+id/contactdetails_fragment_container"
+    <FrameLayout android:id="@+id/donatordetails_fragment_container"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

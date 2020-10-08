@@ -25,7 +25,7 @@
 
 
             <FrameLayout
-                android:id="@+id/contactlist_fragment_container"
+                android:id="@+id/donatorlist_fragment_container"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -37,7 +37,7 @@
 
 
 
-            <FrameLayout android:id="@+id/contactdetails_fragment_container"
+            <FrameLayout android:id="@+id/donatordetails_fragment_container"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
