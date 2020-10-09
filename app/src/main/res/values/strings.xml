@@ -25,4 +25,5 @@
     <string name="amountDonate">donateAmount</string>
     <string name="saveAmount">Submit</string>
     <string name="amount">Amount</string>
+    <string name="date">Date</string>
 </resources>

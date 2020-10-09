@@ -35,10 +35,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="157dp"
-            android:layout_marginTop="106dp"
+            android:layout_marginLeft="158dp"
+            android:layout_marginTop="161dp"
             android:ems="10"
-            android:inputType="text"></EditText>
+            android:inputType="number|text"></EditText>
 
         <TextView
             android:id="@+id/textView1"
@@ -49,6 +49,28 @@
             android:layout_marginLeft="19dp"
             android:layout_marginBottom="5dp"
             android:text="@string/amount"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/editTextDate"
+            android:layout_width="238dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="157dp"
+            android:layout_marginTop="106dp"
+            android:ems="10"
+            android:inputType="date"></EditText>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/editTextDate"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="19dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/date"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <requestFocus />
