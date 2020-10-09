@@ -1,9 +1,5 @@
 package ict376.murdoch.edu.au.donationdatabase;
 
-/**
- * Created by Hamid on 5/10/2017.
- */
-
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;

@@ -1,9 +1,5 @@
 package ict376.murdoch.edu.au.donationdatabase;
 
-/**
- * Created by Hamid on 5/10/2017.
- */
-
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -18,10 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-/**
- * Created by Hamid on 1/09/2017.
- */
 
 @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
 public  class DonatorDetailsFragment extends Fragment {
@@ -42,6 +34,8 @@ public  class DonatorDetailsFragment extends Fragment {
     Button mEditButton;
     Button mSaveButton;
     Button mDeleteButton;
+    Button mDonateButton;
+    Button mBackButton;
 
     /**
      * Create a new instance of DetailsFragment, initialized to
@@ -171,6 +165,8 @@ public  class DonatorDetailsFragment extends Fragment {
         mEditButton   = (Button) getActivity().findViewById(R.id.button_edit);
         mSaveButton   = (Button) getActivity().findViewById(R.id.button1);
         mDeleteButton = (Button) getActivity().findViewById(R.id.button_delete);
+        mDonateButton = (Button) getActivity().findViewById(R.id.button_donate);
+        mBackButton = (Button) getActivity().findViewById(R.id.button_back);
 
         mEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,17 +192,28 @@ public  class DonatorDetailsFragment extends Fragment {
                 onDeleteDonatorClick();
             }
         });
+
+        mDonateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onDonateClick();
+            }
+        });
     }
 
     private void setButtonsToEditMode(){
         mSaveButton.setVisibility(View.VISIBLE);
         mEditButton.setVisibility(View.INVISIBLE);
         mDeleteButton.setVisibility(View.INVISIBLE);
+//        mDonateButton.setVisibility(View.INVISIBLE);
+//        mBackButton.setVisibility(View.VISIBLE);
     }
     private void setButtonsToViewMode(){
         mSaveButton.setVisibility(View.INVISIBLE);
         mEditButton.setVisibility(View.VISIBLE);
         mDeleteButton.setVisibility(View.VISIBLE);
+//        mDonateButton.setVisibility(View.VISIBLE);
+//        mBackButton.setVisibility(View.VISIBLE);
     }
 
     public void onDeleteDonatorClick(){
@@ -231,6 +238,12 @@ public  class DonatorDetailsFragment extends Fragment {
         d.setTitle("Are you sure?");
         d.show();
 
+    }
+
+    public void onDonateClick(){
+
+        Intent intent = new Intent(getActivity().getApplicationContext(),DonateActivity.class);
+        startActivity(intent);
     }
 
     public void onEditDonatorClick(){
