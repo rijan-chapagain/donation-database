@@ -93,7 +93,7 @@ public class DonatorListFragment extends Fragment {
                     Bundle dataBundle = new Bundle();
 
                     dataBundle.putInt("id", id_To_Search);
-                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonator.class);
+                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonatorActivity.class);
                     intent.putExtras(dataBundle);
                     startActivityForResult(intent, REQUEST_CODE_NEW_DONATOR);
                 }
@@ -129,7 +129,7 @@ public class DonatorListFragment extends Fragment {
                     Bundle dataBundle = new Bundle();
                     dataBundle.putInt("id", 0);
 
-                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonator.class);
+                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonatorActivity.class);
                     intent.putExtras(dataBundle);   //
 
                     startActivity(intent);          //

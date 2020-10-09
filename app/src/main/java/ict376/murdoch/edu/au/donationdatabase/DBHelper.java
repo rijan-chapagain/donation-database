@@ -34,8 +34,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String AMOUNTSDONATED_COLUMN_DATE  = "date";
     public static final String AMOUNTSDONATED_COLUMN_AMOUNT_DONATED = "amount_donated";
 
-
-
     static int ver = 1;
 
     public DBHelper(Context context) {

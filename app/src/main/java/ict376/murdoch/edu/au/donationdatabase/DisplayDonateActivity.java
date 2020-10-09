@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import android.support.annotation.RequiresApi;
 
-public class DonateActivity extends Activity {
+public class DisplayDonateActivity extends Activity {
 
     DonateFragment donateFragment;
 

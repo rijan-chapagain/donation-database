@@ -242,7 +242,7 @@ public  class DonatorDetailsFragment extends Fragment {
 
     public void onDonateClick(){
 
-        Intent intent = new Intent(getActivity().getApplicationContext(),DonateActivity.class);
+        Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonateActivity.class);
         startActivity(intent);
     }
 
@@ -284,8 +284,8 @@ public  class DonatorDetailsFragment extends Fragment {
             // Updating a donator
             if(mydb.updateDonator(id_To_Update,name.getText().toString(), phone.getText().toString(), email.getText().toString(), street.getText().toString(), place.getText().toString())){
                 Toast.makeText(getActivity().getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
-                // Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
-                //startActivity(intent);
+                 Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
+                startActivity(intent);
             }
             else{
                 Toast.makeText(getActivity().getApplicationContext(), "not Updated", Toast.LENGTH_SHORT).show();
