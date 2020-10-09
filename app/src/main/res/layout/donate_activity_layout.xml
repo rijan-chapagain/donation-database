@@ -8,10 +8,9 @@
 
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="300dp"
         >
-
 
         <TextView
             android:id="@+id/welcomeNote"
@@ -27,10 +26,11 @@
             android:layout_marginRight="38dp"
             android:layout_marginBottom="5dp"
             android:text="Thank you for your contribution"
+            android:textColor="#ff16ff01"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/editTextName"
+            android:id="@+id/editTextAmount"
             android:layout_width="238dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -44,10 +44,12 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/editTextName"
+            android:layout_below="@+id/textView2"
+            android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="19dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="24dp"
             android:text="@string/amount"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -61,6 +63,7 @@
             android:layout_marginTop="106dp"
             android:ems="10"
             android:inputType="date"></EditText>
+        <requestFocus />
 
         <TextView
             android:id="@+id/textView2"
@@ -68,12 +71,10 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/editTextDate"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="19dp"
+            android:layout_marginLeft="18dp"
             android:layout_marginBottom="5dp"
             android:text="@string/date"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <requestFocus />
 
         <Button
             android:id="@+id/button_back"
@@ -92,7 +93,7 @@
             android:text="@string/back" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/button_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
