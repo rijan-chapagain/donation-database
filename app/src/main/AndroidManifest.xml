@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".DisplayDonator"/>
+        <activity android:name=".DisplayDonatorActivity"/>
+        <activity android:name=".DisplayDonateActivity"/>
 
     </application>
 

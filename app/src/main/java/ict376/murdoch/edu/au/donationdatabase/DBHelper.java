@@ -1,9 +1,5 @@
 package ict376.murdoch.edu.au.donationdatabase;
 
-/**
- * Created by Hamid on 5/10/2017.
- */
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,8 +33,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String AMOUNTSDONATED_COLUMN_DONATOR_ID    = "donator_id";
     public static final String AMOUNTSDONATED_COLUMN_DATE  = "date";
     public static final String AMOUNTSDONATED_COLUMN_AMOUNT_DONATED = "amount_donated";
-
-
 
     static int ver = 1;
 
@@ -125,6 +119,27 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Insert a row (a new donated_amount) into the donators table
+     * @param amount
+     * @param date
+     * @return
+     */
+    public boolean insertDonatedAmount  (String amount, String date)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Prepare the row to insert
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("amount_donated", amount);
+        contentValues.put("date", date);
+
+        // Insert the row
+        db.insert("amountsDonated", null, contentValues);
+        return true;
+    }
+
+    /**
      * Update the row of ID = id with these new values
      * @param id
      * @param name
@@ -148,6 +163,27 @@ public class DBHelper extends SQLiteOpenHelper {
 
         // run the update query
         db.update("donators", contentValues, "id = ? ", new String[] { Integer.toString(id) } );
+        return true;
+    }
+
+    /**
+     * Update the row of ID = id with these new values
+     * @param id
+     * @param amount
+     * @param date
+     * @return
+     */
+    public boolean updateDonatedAmount (Integer id, String amount, String date) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Prepare the new values
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("amount_donated", amount);
+        contentValues.put("date", date);
+
+        // run the update query
+        db.update("amountsDonated", contentValues, "id = ? ", new String[] { Integer.toString(id) } );
         return true;
     }
 
