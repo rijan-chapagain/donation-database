@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import 	android.util.Pair;
 
 @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
-public class DonatorListFragment extends Fragment {
+public class DonationHistoryFragment extends Fragment {
 
     public final static String EXTRA_MESSAGE = "MESSAGE";
     public final static int REQUEST_CODE_NEW_DONATOR = 1;
@@ -45,7 +45,7 @@ public class DonatorListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mLayoutView = inflater.inflate(R.layout.donator_list_layout, null);
+        mLayoutView = inflater.inflate(R.layout.fragment_donation_history, null);
         return mLayoutView;
     }
 
