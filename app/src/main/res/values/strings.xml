@@ -26,4 +26,5 @@
     <string name="saveAmount">Submit</string>
     <string name="amount">Amount</string>
     <string name="date">Date</string>
+    <string name="donationHistory">Donation History</string>
 </resources>
