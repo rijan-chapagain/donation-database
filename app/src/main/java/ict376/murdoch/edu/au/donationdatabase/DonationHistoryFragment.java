@@ -28,7 +28,7 @@ public class DonationHistoryFragment extends Fragment {
     // Views
     boolean mDualPane;
     View    mLayoutView;
-    Button  mNewContactButton;
+    Button  mDonateButton;
     private ListView obj;
 
     // Database
@@ -83,7 +83,7 @@ public class DonationHistoryFragment extends Fragment {
                 if (mDualPane) {
 
                     // display on the same Activity
-                    DonatorDetailsFragment details = DonatorDetailsFragment.newInstance(id_To_Search);
+                    DonateFragment details = DonateFragment.newInstance(id_To_Search);
 
                     // Execute a transaction, replacing any existing fragment
                     // with this one inside the frame.
@@ -106,41 +106,42 @@ public class DonationHistoryFragment extends Fragment {
 
 
         // set the onclick listener for the button
-//        mNewContactButton = (Button) getActivity().findViewById(R.id.new_button);
-//
-//        mNewContactButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                View detailsFrame = getActivity().findViewById(R.id.donatordetails_fragment_container);
-//                mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
-//
-//                if (mDualPane) {
-//
-//                    // display on the same Activity
-//                    DonatorDetailsFragment details = DonatorDetailsFragment.newInstance(0);
-//
-//                    // Execute a transaction, replacing any existing fragment
-//                    // with this one inside the frame.
-//                    FragmentTransaction ft = getFragmentManager().beginTransaction();
-//                    ft.replace(R.id.donatordetails_fragment_container, details);
-//
-//                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-//                    ft.commit();
-//
-//                }else {
-//
-//                    Bundle dataBundle = new Bundle();
-//                    dataBundle.putInt("id", 0);
-//
-//                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonatorActivity.class);
-//                    intent.putExtras(dataBundle);   //
-//
-//                    startActivity(intent);          //
-//                }
-//
-//            }
-//        });
+        mDonateButton = (Button) getActivity().findViewById(R.id.button_donate);
+
+        mDonateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                View detailsFrame = getActivity().findViewById(R.id.donatordetails_fragment_container);
+                mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
+
+                if (mDualPane) {
+
+                    // display on the same Activity
+                    DonateFragment details = DonateFragment.newInstance(0);
+
+                    // Execute a transaction, replacing any existing fragment
+                    // with this one inside the frame.
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    ft.replace(R.id.donatordetails_fragment_container, details);
+
+                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    ft.commit();
+
+                }else {
+                    // display on the new Activity
+
+                    Bundle dataBundle = new Bundle();
+                    dataBundle.putInt("id", 0);
+
+                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonateActivity.class);
+                    intent.putExtras(dataBundle);   //
+
+                    startActivity(intent);          //
+                }
+
+            }
+        });
 
 
 

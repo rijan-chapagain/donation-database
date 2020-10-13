@@ -60,7 +60,7 @@ public  class DonateFragment extends Fragment {
             return null;
         }
 
-        mLayoutView = inflater.inflate(R.layout.donator_details_layout, null);
+        mLayoutView = inflater.inflate(R.layout.donate_activity_layout, null);
 
         return mLayoutView;
     }

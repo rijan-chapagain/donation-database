@@ -76,12 +76,12 @@ public class DonatorListFragment extends Fragment {
 
                     // landscape mode
                     // display on the same Activity
-                    DonatorDetailsFragment details = DonatorDetailsFragment.newInstance(id_To_Search);
+                    DonationHistoryFragment history = DonationHistoryFragment.newInstance(id_To_Search);
 
                     // Execute a transaction, replacing any existing fragment
                     // with this one inside the frame.
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.replace(R.id.donatordetails_fragment_container, details);
+                    ft.replace(R.id.donatordetails_fragment_container, history);
 
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     ft.commit();
@@ -127,7 +127,7 @@ public class DonatorListFragment extends Fragment {
                     Bundle dataBundle = new Bundle();
                     dataBundle.putInt("id", 0);
 
-                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonatorActivity.class);
+                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayNewDonatorActivity.class);
                     intent.putExtras(dataBundle);   //
 
                     startActivity(intent);          //

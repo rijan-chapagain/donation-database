@@ -72,6 +72,16 @@ public class DBHelper extends SQLiteOpenHelper {
                         AMOUNTSDONATED_COLUMN_DONATOR_ID + " integer,  FOREIGN KEY (" +  AMOUNTSDONATED_COLUMN_DONATOR_ID + ") REFERENCES " +
                         DONATORS_TABLE_NAME + "(" +  DONATORS_COLUMN_ID + "))"
         );
+
+        // Creating donation history table
+//        db.execSQL(
+//                "create table " +  AMOUNTSDONATED_TABLE_NAME + "(" +
+//                        AMOUNTSDONATED_COLUMN_ID + " integer primary key, " +
+//                        AMOUNTSDONATED_COLUMN_DATE   + " date, " +
+//                        AMOUNTSDONATED_COLUMN_AMOUNT_DONATED  + " real," +
+//                        AMOUNTSDONATED_COLUMN_DONATOR_ID + " integer,  FOREIGN KEY (" +  AMOUNTSDONATED_COLUMN_DONATOR_ID + ") REFERENCES " +
+//                        DONATORS_TABLE_NAME + "(" +  DONATORS_COLUMN_ID + "))"
+//        );
     }
 
     /**
