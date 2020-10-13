@@ -254,6 +254,29 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Retrieving a row given a donator ID
+     * Here, we will use the method rawQuery
+     * @param id
+     * @return
+     */
+    public Cursor getAmountData(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from amountsDonated where id="+id+"", null );
+
+        /*
+        Cursor res =  db.rawQuery( "select " + DONATORS_TABLE_NAME + ".*, sum(" + DONATIONS_TABLE_NAME + "." + DONATIONS_COLUMN_AMOUNT_DONATED + ") " +
+                                    "from " +  DONATORS_TABLE_NAME + ", " + DONATIONS_TABLE_NAME + " " +
+                                    "where " + DONATORS_TABLE_NAME + "." + DONATORS_COLUMN_ID + "=" + id  + " and " + DONATIONS_TABLE_NAME +  "." + DONATIONS_COLUMN_DONATOR_ID + " = " + id, null );
+
+        */
+
+        // select donators.*, sum(donations.amount_donated) from donators, donations where donators.id = id  and  donations.donator_id = id
+
+
+        return res;
+    }
+
+    /**
      * Count the number of rows in a table
      * @return
      */

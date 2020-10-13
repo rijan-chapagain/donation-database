@@ -168,15 +168,15 @@ public  class DonatorDetailsFragment extends Fragment {
         mDonateButton = (Button) getActivity().findViewById(R.id.button_donate);
         mBackButton = (Button) getActivity().findViewById(R.id.button_back);
 
-        mEditButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                setButtonsToEditMode();
-                onEditDonatorClick();
-
-            }
-        });
+//        mEditButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                setButtonsToEditMode();
+//                onEditDonatorClick();
+//
+//            }
+//        });
 
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,34 +186,30 @@ public  class DonatorDetailsFragment extends Fragment {
             }
         });
 
-        mDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onDeleteDonatorClick();
-            }
-        });
+//        mDeleteButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onDeleteDonatorClick();
+//            }
+//        });
 
-        mDonateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onDonateClick();
-            }
-        });
+//        mDonateButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onDonateClick();
+//            }
+//        });
     }
 
     private void setButtonsToEditMode(){
         mSaveButton.setVisibility(View.VISIBLE);
         mEditButton.setVisibility(View.INVISIBLE);
         mDeleteButton.setVisibility(View.INVISIBLE);
-//        mDonateButton.setVisibility(View.INVISIBLE);
-//        mBackButton.setVisibility(View.VISIBLE);
     }
     private void setButtonsToViewMode(){
         mSaveButton.setVisibility(View.INVISIBLE);
         mEditButton.setVisibility(View.VISIBLE);
         mDeleteButton.setVisibility(View.VISIBLE);
-//        mDonateButton.setVisibility(View.VISIBLE);
-//        mBackButton.setVisibility(View.VISIBLE);
     }
 
     public void onDeleteDonatorClick(){

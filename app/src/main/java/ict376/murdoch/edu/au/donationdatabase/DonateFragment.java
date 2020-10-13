@@ -92,36 +92,45 @@ public  class DonateFragment extends Fragment {
 
              Toast.makeText(getActivity(), Integer.toString(Value), Toast.LENGTH_SHORT).show();
 
-            Cursor rs = mydb.getData(Value);
+            Cursor rs = mydb.getAmountData(Value);
             id_To_Update = Value;
             rs.moveToFirst();
-
-            String amoun   = rs.getString(rs.getColumnIndex(DBHelper.AMOUNTSDONATED_COLUMN_AMOUNT_DONATED));
-            String dat  = rs.getString(rs.getColumnIndex(DBHelper.AMOUNTSDONATED_COLUMN_DATE));
+//
+//            String amoun   = rs.getString(rs.getColumnIndex(DBHelper.AMOUNTSDONATED_COLUMN_AMOUNT_DONATED));
+//            String dat  = rs.getString(rs.getColumnIndex(DBHelper.AMOUNTSDONATED_COLUMN_DATE));
 
             if (!rs.isClosed()) {
                 rs.close();
             }
 
-             Toast.makeText(getActivity(), amoun, Toast.LENGTH_SHORT).show();
+//             Toast.makeText(getActivity(), amoun, Toast.LENGTH_SHORT).show();
 //            setButtonsToViewMode();
 
-            amount.setText((CharSequence)amoun);
+//            amount.setText((CharSequence)amoun);
+//            amount.setFocusable(false);
+//            amount.setClickable(false);
+//            amount.setFocusableInTouchMode(false);
+//            amount.setEnabled(false);
+//
+//            date.setText((CharSequence)dat);
+//            date.setFocusable(false);
+//            date.setClickable(false);
+//            date.setFocusableInTouchMode(false);
+//            date.setEnabled(false);
 
-            date.setText((CharSequence)dat);
         }
 
         // setting the listeners for the buttons
         mSubmitButton   = (Button) getActivity().findViewById(R.id.button_submit);
         mBackButton = (Button) getActivity().findViewById(R.id.button_back);
 
-        mSubmitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                run();
-                onSubmitButtonCLick();
-            }
-        });
+//        mSubmitButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                run();
+//                onSubmitButtonCLick();
+//            }
+//        });
 
         mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,8 +142,8 @@ public  class DonateFragment extends Fragment {
 
     public  void onSubmitButtonCLick() {
         Toast.makeText(getActivity().getApplicationContext(), "Back to home", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
+//        startActivity(intent);
     }
 
     public void onBackButtonClick(){
@@ -166,7 +175,7 @@ public  class DonateFragment extends Fragment {
         int Value = getShownIndex();
         if(Value>0){
 
-            // Updating a donator
+            // Updating a donated amount
             if(mydb.updateDonatedAmount(id_To_Update, amount.getText().toString(), date.getText().toString())){
                 Toast.makeText(getActivity().getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
                 // Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
@@ -177,7 +186,7 @@ public  class DonateFragment extends Fragment {
             }
         }
         else{
-            // inserting a new donator
+            // inserting a new donated amount
             if(mydb.insertDonatedAmount(amount.getText().toString(), date.getText().toString())){
                 Toast.makeText(getActivity().getApplicationContext(), "Donated amount inserted!", Toast.LENGTH_SHORT).show();
 
@@ -197,10 +206,10 @@ public  class DonateFragment extends Fragment {
         }
 
         // Refresh the fragment in which the list of data is re-displayed
-//        DonatorListFragment donatorListFragment = (DonatorListFragment)getFragmentManager().findFragmentById(R.id.donatorlist_fragment_container);
-//        if (donatorListFragment!=null){
-//            donatorListFragment.refresh();
-//        }
+        DonatorListFragment donatorListFragment = (DonatorListFragment)getFragmentManager().findFragmentById(R.id.donatorlist_fragment_container);
+        if (donatorListFragment!=null){
+            donatorListFragment.refresh();
+        }
 
 
     }

@@ -28,7 +28,7 @@ public class DonatorListFragment extends Fragment {
     // Views
     boolean mDualPane;
     View    mLayoutView;
-    Button  mNewContactButton;
+    Button  mNewButton;
     private ListView obj;
 
     // Database
@@ -64,7 +64,7 @@ public class DonatorListFragment extends Fragment {
 
                 // Here either start a new activity or display it on the same window
 
-                // The index of the Contact that will be shown in the new activity DislayActivity.java
+                // The index of the Donator that will be shown in the new activity DislayActivity.java
                 Pair<Integer, String> p = (Pair<Integer, String>)mArrayList.get(position);
                 int id_To_Search = p.first; // position + 1;
 
@@ -74,6 +74,7 @@ public class DonatorListFragment extends Fragment {
 
                 if (mDualPane) {
 
+                    // landscape mode
                     // display on the same Activity
                     DonatorDetailsFragment details = DonatorDetailsFragment.newInstance(id_To_Search);
 
@@ -86,6 +87,7 @@ public class DonatorListFragment extends Fragment {
                     ft.commit();
 
                 }else {
+                    // portrait mode
                     Bundle dataBundle = new Bundle();
 
                     dataBundle.putInt("id", id_To_Search);
@@ -98,9 +100,9 @@ public class DonatorListFragment extends Fragment {
 
 
         // set the onclick listener for the button
-        mNewContactButton = (Button) getActivity().findViewById(R.id.new_button);
+        mNewButton = (Button) getActivity().findViewById(R.id.new_button);
 
-        mNewContactButton.setOnClickListener(new View.OnClickListener() {
+        mNewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -108,7 +110,7 @@ public class DonatorListFragment extends Fragment {
                 mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 
                 if (mDualPane) {
-
+                    // landscape mode
                     // display on the same Activity
                     DonatorDetailsFragment details = DonatorDetailsFragment.newInstance(0);
 
@@ -121,7 +123,7 @@ public class DonatorListFragment extends Fragment {
                     ft.commit();
 
                 }else {
-
+                // portrait mode
                     Bundle dataBundle = new Bundle();
                     dataBundle.putInt("id", 0);
 

@@ -8,7 +8,7 @@ import android.support.annotation.RequiresApi;
 
 public class DisplayDonatorActivity extends Activity {
 
-    DonatorDetailsFragment donatorDetailsFragment;
+    DonationHistoryFragment donatorHistoryFragment;
 
     @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -23,10 +23,10 @@ public class DisplayDonatorActivity extends Activity {
             ix = extras.getInt("id", -1);
 
         if (savedInstanceState == null) {
-            donatorDetailsFragment = DonatorDetailsFragment.newInstance(ix);
-            getFragmentManager().beginTransaction().add(R.id.donatordetails_fragment_container, donatorDetailsFragment).commit();
+            donatorHistoryFragment = DonationHistoryFragment.newInstance(ix);
+            getFragmentManager().beginTransaction().add(R.id.donatordetails_fragment_container, donatorHistoryFragment).commit();
         }else{
-            donatorDetailsFragment = (DonatorDetailsFragment)getFragmentManager().findFragmentById(R.id.donatordetails_fragment_container);
+            donatorHistoryFragment = (DonationHistoryFragment) getFragmentManager().findFragmentById(R.id.donatordetails_fragment_container);
         }
 
 
