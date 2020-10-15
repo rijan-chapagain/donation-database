@@ -254,13 +254,35 @@ public class DBHelper extends SQLiteOpenHelper {
             res.moveToFirst();
 
             while (res.isAfterLast() == false) {
-                array_list.add(new Pair(res.getInt(res.getColumnIndex(AMOUNTSDONATED_COLUMN_ID)),res.getString(res.getColumnIndex(AMOUNTSDONATED_COLUMN_AMOUNT_DONATED))));
-//                array_list.add(new Pair(res.getInt(res.getColumnIndex(AMOUNTSDONATED_COLUMN_ID)), res.getString(res.getColumnIndex(AMOUNTSDONATED_COLUMN_DATE)),res.getString(res.getColumnIndex(AMOUNTSDONATED_COLUMN_AMOUNT_DONATED))));
+                array_list.add(new Pair(res.getInt(res.getColumnIndex(AMOUNTSDONATED_COLUMN_DONATOR_ID)), res.getString(res.getColumnIndex(AMOUNTSDONATED_COLUMN_DATE))));
+                array_list.add(new Pair(res.getInt(res.getColumnIndex(AMOUNTSDONATED_COLUMN_DONATOR_ID)),res.getString(res.getColumnIndex(AMOUNTSDONATED_COLUMN_AMOUNT_DONATED))));
                 res.moveToNext();
             }
 
         }
         return array_list;
+    }
+
+    public int getSumValue(){
+        int sum=0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sumQuery = String.format("SELECT SUM(%s) as Total FROM %s",DBHelper.AMOUNTSDONATED_COLUMN_AMOUNT_DONATED,DBHelper.AMOUNTSDONATED_TABLE_NAME);
+
+        Cursor cursor= db.rawQuery(sumQuery,null);
+        if(cursor.moveToFirst())
+            sum= cursor.getInt(cursor.getColumnIndex("Total"));
+        return sum;
+    }
+
+    public int getTotalSum(){
+        int sum=0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sumQuery = String.format("SELECT SUM(%s) as Total FROM %s",DBHelper.AMOUNTSDONATED_COLUMN_AMOUNT_DONATED,DBHelper.AMOUNTSDONATED_TABLE_NAME);
+
+        Cursor cursor= db.rawQuery(sumQuery,null);
+        if(cursor.moveToFirst())
+            sum= cursor.getInt(cursor.getColumnIndex("Total"));
+        return sum;
     }
 
 
