@@ -72,6 +72,16 @@ public class DBHelper extends SQLiteOpenHelper {
                         AMOUNTSDONATED_COLUMN_DONATOR_ID + " integer,  FOREIGN KEY (" +  AMOUNTSDONATED_COLUMN_DONATOR_ID + ") REFERENCES " +
                         DONATORS_TABLE_NAME + "(" +  DONATORS_COLUMN_ID + "))"
         );
+
+        // Creating donation history table
+//        db.execSQL(
+//                "create table " +  AMOUNTSDONATED_TABLE_NAME + "(" +
+//                        AMOUNTSDONATED_COLUMN_ID + " integer primary key, " +
+//                        AMOUNTSDONATED_COLUMN_DATE   + " date, " +
+//                        AMOUNTSDONATED_COLUMN_AMOUNT_DONATED  + " real," +
+//                        AMOUNTSDONATED_COLUMN_DONATOR_ID + " integer,  FOREIGN KEY (" +  AMOUNTSDONATED_COLUMN_DONATOR_ID + ") REFERENCES " +
+//                        DONATORS_TABLE_NAME + "(" +  DONATORS_COLUMN_ID + "))"
+//        );
     }
 
     /**
@@ -229,6 +239,30 @@ public class DBHelper extends SQLiteOpenHelper {
         return array_list;
     }
 
+    /**
+     * Get the list of all history
+     * @return
+     */
+    public ArrayList<Pair<Integer, String>> getAllHistory()
+    {
+        ArrayList<Pair<Integer, String>> array_list = new ArrayList<Pair<Integer, String>>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from amountsDonated", null );
+
+        if (res.getCount() > 0) {
+            res.moveToFirst();
+
+            while (res.isAfterLast() == false) {
+                array_list.add(new Pair(res.getInt(res.getColumnIndex(AMOUNTSDONATED_COLUMN_ID)),res.getString(res.getColumnIndex(AMOUNTSDONATED_COLUMN_AMOUNT_DONATED))));
+//                array_list.add(new Pair(res.getInt(res.getColumnIndex(AMOUNTSDONATED_COLUMN_ID)), res.getString(res.getColumnIndex(AMOUNTSDONATED_COLUMN_DATE)),res.getString(res.getColumnIndex(AMOUNTSDONATED_COLUMN_AMOUNT_DONATED))));
+                res.moveToNext();
+            }
+
+        }
+        return array_list;
+    }
+
 
     /**
      * Retrieving a row given a donator ID
@@ -239,6 +273,29 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor getData(int id){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from donators where id="+id+"", null );
+
+        /*
+        Cursor res =  db.rawQuery( "select " + DONATORS_TABLE_NAME + ".*, sum(" + DONATIONS_TABLE_NAME + "." + DONATIONS_COLUMN_AMOUNT_DONATED + ") " +
+                                    "from " +  DONATORS_TABLE_NAME + ", " + DONATIONS_TABLE_NAME + " " +
+                                    "where " + DONATORS_TABLE_NAME + "." + DONATORS_COLUMN_ID + "=" + id  + " and " + DONATIONS_TABLE_NAME +  "." + DONATIONS_COLUMN_DONATOR_ID + " = " + id, null );
+
+        */
+
+        // select donators.*, sum(donations.amount_donated) from donators, donations where donators.id = id  and  donations.donator_id = id
+
+
+        return res;
+    }
+
+    /**
+     * Retrieving a row given a donator ID
+     * Here, we will use the method rawQuery
+     * @param id
+     * @return
+     */
+    public Cursor getAmountData(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from amountsDonated where id="+id+"", null );
 
         /*
         Cursor res =  db.rawQuery( "select " + DONATORS_TABLE_NAME + ".*, sum(" + DONATIONS_TABLE_NAME + "." + DONATIONS_COLUMN_AMOUNT_DONATED + ") " +

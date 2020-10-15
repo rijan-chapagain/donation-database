@@ -23,7 +23,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="amountDonate">donateAmount</string>
-    <string name="saveAmount">Submit</string>
+    <string name="submit">Submit</string>
     <string name="amount">Amount</string>
     <string name="date">Date</string>
+    <string name="donationHistory">Donation History</string>
 </resources>

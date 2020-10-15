@@ -17,9 +17,10 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import 	android.util.Pair;
+import android.widget.TextView;
 
 @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
-public class DonationHistoryFragment extends Fragment {
+public class HistoryListFragment extends Fragment {
 
     public final static String EXTRA_MESSAGE = "MESSAGE";
     public final static int REQUEST_CODE_NEW_DONATOR = 1;
@@ -28,17 +29,26 @@ public class DonationHistoryFragment extends Fragment {
     // Views
     boolean mDualPane;
     View    mLayoutView;
-    Button  mNewContactButton;
+    Button  mDonateButton;
+    private TextView mAmountDonated;
     private ListView obj;
 
     // Database
     DBHelper mydb = null;
     ArrayList mArrayList;  // the list of all donators
 
-    public static DonatorListFragment newInstance(){
+    public static HistoryListFragment newInstance(int index){
 
-        DonatorListFragment f = new DonatorListFragment();
+        HistoryListFragment f = new HistoryListFragment();
+        Bundle args = new Bundle();
+        args.putInt("index", index);
+        f.setArguments(args);
+
         return f;
+    }
+
+    public int getShownIndex() {
+        return getArguments().getInt("index", 0);
     }
 
     @Override
@@ -75,7 +85,7 @@ public class DonationHistoryFragment extends Fragment {
                 if (mDualPane) {
 
                     // display on the same Activity
-                    DonatorDetailsFragment details = DonatorDetailsFragment.newInstance(id_To_Search);
+                    AmountDetailsFragment details = AmountDetailsFragment.newInstance(id_To_Search);
 
                     // Execute a transaction, replacing any existing fragment
                     // with this one inside the frame.
@@ -89,7 +99,7 @@ public class DonationHistoryFragment extends Fragment {
                     Bundle dataBundle = new Bundle();
 
                     dataBundle.putInt("id", id_To_Search);
-                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonatorActivity.class);
+                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayHistoryActivity.class);
                     intent.putExtras(dataBundle);
                     startActivityForResult(intent, REQUEST_CODE_NEW_DONATOR);
                 }
@@ -98,9 +108,11 @@ public class DonationHistoryFragment extends Fragment {
 
 
         // set the onclick listener for the button
-        mNewContactButton = (Button) getActivity().findViewById(R.id.new_button);
+        mDonateButton = (Button) getActivity().findViewById(R.id.button_donate);
 
-        mNewContactButton.setOnClickListener(new View.OnClickListener() {
+        mAmountDonated = getActivity().findViewById(R.id.textViewAmtDonated);
+
+        mDonateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -110,7 +122,7 @@ public class DonationHistoryFragment extends Fragment {
                 if (mDualPane) {
 
                     // display on the same Activity
-                    DonatorDetailsFragment details = DonatorDetailsFragment.newInstance(0);
+                    AmountDetailsFragment details = AmountDetailsFragment.newInstance(0);
 
                     // Execute a transaction, replacing any existing fragment
                     // with this one inside the frame.
@@ -121,11 +133,12 @@ public class DonationHistoryFragment extends Fragment {
                     ft.commit();
 
                 }else {
+                    // display on the new Activity
 
                     Bundle dataBundle = new Bundle();
                     dataBundle.putInt("id", 0);
 
-                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonatorActivity.class);
+                    Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonateActivity.class);
                     intent.putExtras(dataBundle);   //
 
                     startActivity(intent);          //
@@ -136,6 +149,10 @@ public class DonationHistoryFragment extends Fragment {
 
 
 
+    }
+
+    private void updatePointsTable() {
+        mAmountDonated.setText("Amounts Donated(AUD): $ "  );
     }
 
     @Override
@@ -152,7 +169,7 @@ public class DonationHistoryFragment extends Fragment {
             mydb = new DBHelper(getActivity());
 
         // Get all the donators from the database
-        mArrayList = mydb.getAllDonators();
+        mArrayList = mydb.getAllHistory();
 
         ArrayList<String> array_list = new  ArrayList<String>();
 

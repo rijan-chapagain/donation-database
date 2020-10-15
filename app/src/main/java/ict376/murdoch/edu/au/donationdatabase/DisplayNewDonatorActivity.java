@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import android.support.annotation.RequiresApi;
 
-public class DisplayDonatorActivity extends Activity {
+public class DisplayNewDonatorActivity extends Activity {
 
     DonatorDetailsFragment donatorDetailsFragment;
 
@@ -26,7 +26,7 @@ public class DisplayDonatorActivity extends Activity {
             donatorDetailsFragment = DonatorDetailsFragment.newInstance(ix);
             getFragmentManager().beginTransaction().add(R.id.donatordetails_fragment_container, donatorDetailsFragment).commit();
         }else{
-            donatorDetailsFragment = (DonatorDetailsFragment)getFragmentManager().findFragmentById(R.id.donatordetails_fragment_container);
+            donatorDetailsFragment = (DonatorDetailsFragment) getFragmentManager().findFragmentById(R.id.donatordetails_fragment_container);
         }
 
 

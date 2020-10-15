@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
-public  class DonateFragment extends Fragment {
+public  class AmountDetailsFragment extends Fragment {
 
     private DBHelper mydb ;
 
@@ -35,9 +35,9 @@ public  class DonateFragment extends Fragment {
      * Create a new instance of DetailsFragment, initialized to
      * show the text at 'index'.
      */
-    public static DonateFragment newInstance(int index) {
+    public static AmountDetailsFragment newInstance(int index) {
 
-        DonateFragment f = new DonateFragment();
+        AmountDetailsFragment f = new AmountDetailsFragment();
 
         // Supply index input as an argument.
         // Google recommends using bundles to pass in arguments
@@ -60,7 +60,7 @@ public  class DonateFragment extends Fragment {
             return null;
         }
 
-        mLayoutView = inflater.inflate(R.layout.donator_details_layout, null);
+        mLayoutView = inflater.inflate(R.layout.donate_activity_layout, null);
 
         return mLayoutView;
     }
@@ -88,11 +88,10 @@ public  class DonateFragment extends Fragment {
          Toast.makeText(getActivity(), Integer.toString(Value), Toast.LENGTH_SHORT).show();
 
         if(Value>0){
-            //means this is in view mode - not the add donator part.
 
              Toast.makeText(getActivity(), Integer.toString(Value), Toast.LENGTH_SHORT).show();
 
-            Cursor rs = mydb.getData(Value);
+            Cursor rs = mydb.getAmountData(Value);
             id_To_Update = Value;
             rs.moveToFirst();
 
@@ -107,8 +106,17 @@ public  class DonateFragment extends Fragment {
 //            setButtonsToViewMode();
 
             amount.setText((CharSequence)amoun);
+            amount.setFocusable(false);
+            amount.setClickable(false);
+            amount.setFocusableInTouchMode(false);
+            amount.setEnabled(false);
 
             date.setText((CharSequence)dat);
+            date.setFocusable(false);
+            date.setClickable(false);
+            date.setFocusableInTouchMode(false);
+            date.setEnabled(false);
+
         }
 
         // setting the listeners for the buttons
@@ -133,8 +141,8 @@ public  class DonateFragment extends Fragment {
 
     public  void onSubmitButtonCLick() {
         Toast.makeText(getActivity().getApplicationContext(), "Back to home", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
+//        startActivity(intent);
     }
 
     public void onBackButtonClick(){
@@ -166,18 +174,18 @@ public  class DonateFragment extends Fragment {
         int Value = getShownIndex();
         if(Value>0){
 
-            // Updating a donator
+            // Updating a donated amount
             if(mydb.updateDonatedAmount(id_To_Update, amount.getText().toString(), date.getText().toString())){
                 Toast.makeText(getActivity().getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
-                // Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
-                //startActivity(intent);
+                 Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
+                startActivity(intent);
             }
             else{
                 Toast.makeText(getActivity().getApplicationContext(), "not Updated", Toast.LENGTH_SHORT).show();
             }
         }
         else{
-            // inserting a new donator
+            // inserting a new donated amount
             if(mydb.insertDonatedAmount(amount.getText().toString(), date.getText().toString())){
                 Toast.makeText(getActivity().getApplicationContext(), "Donated amount inserted!", Toast.LENGTH_SHORT).show();
 
@@ -197,10 +205,10 @@ public  class DonateFragment extends Fragment {
         }
 
         // Refresh the fragment in which the list of data is re-displayed
-//        DonatorListFragment donatorListFragment = (DonatorListFragment)getFragmentManager().findFragmentById(R.id.donatorlist_fragment_container);
-//        if (donatorListFragment!=null){
-//            donatorListFragment.refresh();
-//        }
+        HistoryListFragment historyListFragment = (HistoryListFragment) getFragmentManager().findFragmentById(R.id.donatorlist_fragment_container);
+        if (historyListFragment!=null){
+            historyListFragment.refresh();
+        }
 
 
     }
