@@ -17,6 +17,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import 	android.util.Pair;
+import android.widget.TextView;
+import android.widget.Toast;
 
 @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
 public class DonatorListFragment extends Fragment {
@@ -30,6 +32,7 @@ public class DonatorListFragment extends Fragment {
     View    mLayoutView;
     Button  mNewButton;
     private ListView obj;
+    private TextView mTotalDonation;
 
     // Database
     DBHelper mydb = null;
@@ -52,10 +55,15 @@ public class DonatorListFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
 
+        mTotalDonation = getActivity().findViewById(R.id.textViewTotalDonation);
+
         super.onActivityCreated(savedInstanceState);
 
         // initialise the DB
         refresh();
+
+        Toast.makeText(getActivity(), Integer.toString(mydb.getTotalSum()), Toast.LENGTH_SHORT).show();
+        updateAmount();
 
         // At the click on an item, start a new activity that will display the content of the database
         obj.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -135,9 +143,10 @@ public class DonatorListFragment extends Fragment {
 
             }
         });
+    }
 
-
-
+    private void updateAmount() {
+        mTotalDonation.setText("Your Donation(AUD): $ " + mydb.getTotalSum() );
     }
 
     @Override
