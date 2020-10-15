@@ -8,7 +8,7 @@ import android.support.annotation.RequiresApi;
 
 public class DisplayDonateActivity extends Activity {
 
-    DonateFragment donateFragment;
+    AmountDetailsFragment donateFragment;
 
     @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -23,10 +23,10 @@ public class DisplayDonateActivity extends Activity {
             ix = extras.getInt("id", -1);
 
         if (savedInstanceState == null) {
-            donateFragment = DonateFragment.newInstance(ix);
+            donateFragment = AmountDetailsFragment.newInstance(ix);
             getFragmentManager().beginTransaction().add(R.id.donatordetails_fragment_container, donateFragment).commit();
         }else{
-            donateFragment = (DonateFragment) getFragmentManager().findFragmentById(R.id.donatordetails_fragment_container);
+            donateFragment = (AmountDetailsFragment) getFragmentManager().findFragmentById(R.id.donatordetails_fragment_container);
         }
     }
 }
