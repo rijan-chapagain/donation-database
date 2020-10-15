@@ -6,9 +6,9 @@ import android.os.Bundle;
 
 import android.support.annotation.RequiresApi;
 
-public class DisplayDonatorActivity extends Activity {
+public class DisplayHistoryActivity extends Activity {
 
-    DonationHistoryFragment donatorHistoryFragment;
+    HistoryListFragment donatorHistoryFragment;
 
     @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -23,10 +23,10 @@ public class DisplayDonatorActivity extends Activity {
             ix = extras.getInt("id", -1);
 
         if (savedInstanceState == null) {
-            donatorHistoryFragment = DonationHistoryFragment.newInstance(ix);
+            donatorHistoryFragment = HistoryListFragment.newInstance(ix);
             getFragmentManager().beginTransaction().add(R.id.donatordetails_fragment_container, donatorHistoryFragment).commit();
         }else{
-            donatorHistoryFragment = (DonationHistoryFragment) getFragmentManager().findFragmentById(R.id.donatordetails_fragment_container);
+            donatorHistoryFragment = (HistoryListFragment) getFragmentManager().findFragmentById(R.id.donatordetails_fragment_container);
         }
 
 
