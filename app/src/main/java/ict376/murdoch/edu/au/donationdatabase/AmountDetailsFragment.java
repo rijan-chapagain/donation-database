@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
-public  class DonateFragment extends Fragment {
+public  class AmountDetailsFragment extends Fragment {
 
     private DBHelper mydb ;
 
@@ -35,9 +35,9 @@ public  class DonateFragment extends Fragment {
      * Create a new instance of DetailsFragment, initialized to
      * show the text at 'index'.
      */
-    public static DonateFragment newInstance(int index) {
+    public static AmountDetailsFragment newInstance(int index) {
 
-        DonateFragment f = new DonateFragment();
+        AmountDetailsFragment f = new AmountDetailsFragment();
 
         // Supply index input as an argument.
         // Google recommends using bundles to pass in arguments
@@ -88,35 +88,34 @@ public  class DonateFragment extends Fragment {
          Toast.makeText(getActivity(), Integer.toString(Value), Toast.LENGTH_SHORT).show();
 
         if(Value>0){
-            //means this is in view mode - not the add donator part.
 
              Toast.makeText(getActivity(), Integer.toString(Value), Toast.LENGTH_SHORT).show();
 
             Cursor rs = mydb.getAmountData(Value);
             id_To_Update = Value;
             rs.moveToFirst();
-//
-//            String amoun   = rs.getString(rs.getColumnIndex(DBHelper.AMOUNTSDONATED_COLUMN_AMOUNT_DONATED));
-//            String dat  = rs.getString(rs.getColumnIndex(DBHelper.AMOUNTSDONATED_COLUMN_DATE));
+
+            String amoun   = rs.getString(rs.getColumnIndex(DBHelper.AMOUNTSDONATED_COLUMN_AMOUNT_DONATED));
+            String dat  = rs.getString(rs.getColumnIndex(DBHelper.AMOUNTSDONATED_COLUMN_DATE));
 
             if (!rs.isClosed()) {
                 rs.close();
             }
 
-//             Toast.makeText(getActivity(), amoun, Toast.LENGTH_SHORT).show();
+             Toast.makeText(getActivity(), amoun, Toast.LENGTH_SHORT).show();
 //            setButtonsToViewMode();
 
-//            amount.setText((CharSequence)amoun);
-//            amount.setFocusable(false);
-//            amount.setClickable(false);
-//            amount.setFocusableInTouchMode(false);
-//            amount.setEnabled(false);
-//
-//            date.setText((CharSequence)dat);
-//            date.setFocusable(false);
-//            date.setClickable(false);
-//            date.setFocusableInTouchMode(false);
-//            date.setEnabled(false);
+            amount.setText((CharSequence)amoun);
+            amount.setFocusable(false);
+            amount.setClickable(false);
+            amount.setFocusableInTouchMode(false);
+            amount.setEnabled(false);
+
+            date.setText((CharSequence)dat);
+            date.setFocusable(false);
+            date.setClickable(false);
+            date.setFocusableInTouchMode(false);
+            date.setEnabled(false);
 
         }
 
@@ -124,13 +123,13 @@ public  class DonateFragment extends Fragment {
         mSubmitButton   = (Button) getActivity().findViewById(R.id.button_submit);
         mBackButton = (Button) getActivity().findViewById(R.id.button_back);
 
-//        mSubmitButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                run();
-//                onSubmitButtonCLick();
-//            }
-//        });
+        mSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                run();
+                onSubmitButtonCLick();
+            }
+        });
 
         mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,8 +177,8 @@ public  class DonateFragment extends Fragment {
             // Updating a donated amount
             if(mydb.updateDonatedAmount(id_To_Update, amount.getText().toString(), date.getText().toString())){
                 Toast.makeText(getActivity().getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
-                // Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
-                //startActivity(intent);
+                 Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
+                startActivity(intent);
             }
             else{
                 Toast.makeText(getActivity().getApplicationContext(), "not Updated", Toast.LENGTH_SHORT).show();
@@ -206,9 +205,9 @@ public  class DonateFragment extends Fragment {
         }
 
         // Refresh the fragment in which the list of data is re-displayed
-        DonatorListFragment donatorListFragment = (DonatorListFragment)getFragmentManager().findFragmentById(R.id.donatorlist_fragment_container);
-        if (donatorListFragment!=null){
-            donatorListFragment.refresh();
+        HistoryListFragment historyListFragment = (HistoryListFragment) getFragmentManager().findFragmentById(R.id.donatorlist_fragment_container);
+        if (historyListFragment!=null){
+            historyListFragment.refresh();
         }
 
 
