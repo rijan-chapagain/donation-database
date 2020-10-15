@@ -239,6 +239,30 @@ public class DBHelper extends SQLiteOpenHelper {
         return array_list;
     }
 
+    /**
+     * Get the list of all history
+     * @return
+     */
+    public ArrayList<Pair<Integer, String>> getAllHistory()
+    {
+        ArrayList<Pair<Integer, String>> array_list = new ArrayList<Pair<Integer, String>>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from amountsDonated", null );
+
+        if (res.getCount() > 0) {
+            res.moveToFirst();
+
+            while (res.isAfterLast() == false) {
+                array_list.add(new Pair(res.getInt(res.getColumnIndex(AMOUNTSDONATED_COLUMN_ID)),res.getString(res.getColumnIndex(AMOUNTSDONATED_COLUMN_AMOUNT_DONATED))));
+//                array_list.add(new Pair(res.getInt(res.getColumnIndex(AMOUNTSDONATED_COLUMN_ID)), res.getString(res.getColumnIndex(AMOUNTSDONATED_COLUMN_DATE)),res.getString(res.getColumnIndex(AMOUNTSDONATED_COLUMN_AMOUNT_DONATED))));
+                res.moveToNext();
+            }
+
+        }
+        return array_list;
+    }
+
 
     /**
      * Retrieving a row given a donator ID
