@@ -37,8 +37,6 @@ public class DBHelper extends SQLiteOpenHelper {
     static int ver = 1;
 
     public DBHelper(Context context) {
-        // Syntax: SQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version)
-        // The third argument is used to allow returning subclasses of Cursor when calling query
 
         super(context, DATABASE_NAME , null, ver);
     }
@@ -69,22 +67,12 @@ public class DBHelper extends SQLiteOpenHelper {
                         AMOUNTSDONATED_COLUMN_ID + " integer primary key, " +
                         AMOUNTSDONATED_COLUMN_DATE   + " date, " +
                         AMOUNTSDONATED_COLUMN_AMOUNT_DONATED  + " real," +
-                        AMOUNTSDONATED_COLUMN_DONATOR_ID + " integer,  FOREIGN KEY (" +  AMOUNTSDONATED_COLUMN_DONATOR_ID + ") REFERENCES " +
-                        DONATORS_TABLE_NAME + "(" +  DONATORS_COLUMN_ID + "))"
+                        AMOUNTSDONATED_COLUMN_DONATOR_ID + " integer not null," +
+                        "FOREIGN KEY (" +  AMOUNTSDONATED_COLUMN_DONATOR_ID + ") REFERENCES " + DONATORS_TABLE_NAME + "(" +  DONATORS_COLUMN_ID + "));"
         );
-
-        // Creating donation history table
-//        db.execSQL(
-//                "create table " +  AMOUNTSDONATED_TABLE_NAME + "(" +
-//                        AMOUNTSDONATED_COLUMN_ID + " integer primary key, " +
-//                        AMOUNTSDONATED_COLUMN_DATE   + " date, " +
-//                        AMOUNTSDONATED_COLUMN_AMOUNT_DONATED  + " real," +
-//                        AMOUNTSDONATED_COLUMN_DONATOR_ID + " integer,  FOREIGN KEY (" +  AMOUNTSDONATED_COLUMN_DONATOR_ID + ") REFERENCES " +
-//                        DONATORS_TABLE_NAME + "(" +  DONATORS_COLUMN_ID + "))"
-//        );
     }
 
-    /**
+    /**S
      * In case of upgrade, I will delete the current tables and create a new one
      * onUpgrade() is only called when the database file exists but the stored
      * version number is lower than requested in constructor.
@@ -206,10 +194,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-
         db.delete(AMOUNTSDONATED_TABLE_NAME,
                   AMOUNTSDONATED_COLUMN_DONATOR_ID + " = ?" ,  new String[] { Integer.toString(id) });
-
 
                 // delete donator
         return db.delete(DONATORS_TABLE_NAME,

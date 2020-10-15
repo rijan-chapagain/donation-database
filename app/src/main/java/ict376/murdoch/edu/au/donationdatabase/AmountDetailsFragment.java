@@ -27,20 +27,13 @@ public  class AmountDetailsFragment extends Fragment {
 
     int id_To_Update = 0;
 
-    // the buttons
     Button mBackButton;
     Button mSubmitButton;
 
-    /**
-     * Create a new instance of DetailsFragment, initialized to
-     * show the text at 'index'.
-     */
     public static AmountDetailsFragment newInstance(int index) {
 
         AmountDetailsFragment f = new AmountDetailsFragment();
 
-        // Supply index input as an argument.
-        // Google recommends using bundles to pass in arguments
         Bundle args = new Bundle();
         args.putInt("index", index);
         f.setArguments(args);
@@ -81,12 +74,7 @@ public  class AmountDetailsFragment extends Fragment {
         mSubmitButton = (Button)mLayoutView.findViewById(R.id.button_submit);
         mBackButton = (Button)mLayoutView.findViewById(R.id.button_back);
 
-        //  Bundle extras = getIntent().getExtras();
-
         int Value = getShownIndex();
-
-         Toast.makeText(getActivity(), Integer.toString(Value), Toast.LENGTH_SHORT).show();
-
         if(Value>0){
 
              Toast.makeText(getActivity(), Integer.toString(Value), Toast.LENGTH_SHORT).show();
@@ -141,8 +129,6 @@ public  class AmountDetailsFragment extends Fragment {
 
     public  void onSubmitButtonCLick() {
         Toast.makeText(getActivity().getApplicationContext(), "Back to home", Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
-//        startActivity(intent);
     }
 
     public void onBackButtonClick(){
@@ -188,20 +174,9 @@ public  class AmountDetailsFragment extends Fragment {
             // inserting a new donated amount
             if(mydb.insertDonatedAmount(amount.getText().toString(), date.getText().toString())){
                 Toast.makeText(getActivity().getApplicationContext(), "Donated amount inserted!", Toast.LENGTH_SHORT).show();
-
-                // disable inserting  the same donator again
-
-
             }else{
                 Toast.makeText(getActivity().getApplicationContext(), "Donated amount NOT inserted. ", Toast.LENGTH_SHORT).show();
             }
-
-            // I don't want to start the same activity in which the fragment is running
-            // I want just to refresh the display of a fragment
-
-
-            //Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
-            //startActivity(intent);
         }
 
         // Refresh the fragment in which the list of data is re-displayed
@@ -209,8 +184,5 @@ public  class AmountDetailsFragment extends Fragment {
         if (historyListFragment!=null){
             historyListFragment.refresh();
         }
-
-
     }
-
 }

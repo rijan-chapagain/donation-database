@@ -4,6 +4,7 @@ package ict376.murdoch.edu.au.donationdatabase;
 import android.app.FragmentTransaction;
 import android.app.Fragment;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -18,6 +19,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import 	android.util.Pair;
 import android.widget.TextView;
+import android.widget.Toast;
 
 @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
 public class HistoryListFragment extends Fragment {
@@ -62,10 +64,13 @@ public class HistoryListFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
 
+        mAmountDonated = getActivity().findViewById(R.id.textViewAmtDonated);
         super.onActivityCreated(savedInstanceState);
 
         // initialise the DB
         refresh();
+
+        updateAmount();
 
         // At the click on an item, start a new activity that will display the content of the database
         obj.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -103,14 +108,12 @@ public class HistoryListFragment extends Fragment {
                     intent.putExtras(dataBundle);
                     startActivityForResult(intent, REQUEST_CODE_NEW_DONATOR);
                 }
+                updateAmount();
             }
         });
 
-
         // set the onclick listener for the button
         mDonateButton = (Button) getActivity().findViewById(R.id.button_donate);
-
-        mAmountDonated = getActivity().findViewById(R.id.textViewAmtDonated);
 
         mDonateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,13 +149,10 @@ public class HistoryListFragment extends Fragment {
 
             }
         });
-
-
-
     }
 
-    private void updatePointsTable() {
-        mAmountDonated.setText("Amounts Donated(AUD): $ "  );
+    private void updateAmount() {
+        mAmountDonated.setText("Your Donation(AUD): $ " + mydb.getSumValue() );
     }
 
     @Override

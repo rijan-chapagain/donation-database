@@ -28,8 +28,6 @@ public class DisplayHistoryActivity extends Activity {
         }else{
             donatorHistoryFragment = (HistoryListFragment) getFragmentManager().findFragmentById(R.id.donatordetails_fragment_container);
         }
-
-
     }
 
     /*

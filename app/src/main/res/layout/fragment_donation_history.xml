@@ -22,10 +22,8 @@
             android:id="@+id/textViewAmtDonated"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Amounts Donated(AUD): $ 0 "
-            style="@style/TextAppearance.AppCompat.Headline">
-
-        </TextView>
+            android:text="Your Donation(AUD): $ 0 "
+            style="@style/TextAppearance.AppCompat.Headline"/>
 
         <Button
             android:id="@+id/button_donate"

@@ -146,7 +146,7 @@ public class DonatorListFragment extends Fragment {
     }
 
     private void updateAmount() {
-        mTotalDonation.setText("Your Donation(AUD): $ " + mydb.getTotalSum() );
+        mTotalDonation.setText("Total Donation (AUD): $ " + mydb.getTotalSum() );
     }
 
     @Override
@@ -164,6 +164,8 @@ public class DonatorListFragment extends Fragment {
 
         // Get all the donators from the database
         mArrayList = mydb.getAllDonators();
+
+        updateAmount();
 
         ArrayList<String> array_list = new  ArrayList<String>();
 

@@ -63,13 +63,6 @@ public  class DonatorDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (container == null) {
-            // We have different layouts, and in one of them this
-            // fragment's containing frame doesn't exist.  The fragment
-            // may still be created from its saved state, but there is
-            // no reason to try to create its view hierarchy because it
-            // won't be displayed.  Note this is not needed -- we could
-            // just run the code below, where we would create and return
-            // the view hierarchy; it would just never be used.
             return null;
         }
 
@@ -105,14 +98,14 @@ public  class DonatorDetailsFragment extends Fragment {
 
         int Value = getShownIndex();
 
+
+
         // Toast.makeText(getActivity(), Integer.toString(Value), Toast.LENGTH_SHORT).show();
 
         if(Value>0){
-            //means this is in view mode - not the add donator part.
-
-            // Toast.makeText(getActivity(), Integer.toString(Value), Toast.LENGTH_SHORT).show();
 
             Cursor rs = mydb.getData(Value);
+
             id_To_Update = Value;
             rs.moveToFirst();
 
@@ -168,16 +161,6 @@ public  class DonatorDetailsFragment extends Fragment {
         mDonateButton = (Button) getActivity().findViewById(R.id.button_donate);
         mBackButton = (Button) getActivity().findViewById(R.id.button_back);
 
-//        mEditButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                setButtonsToEditMode();
-//                onEditDonatorClick();
-//
-//            }
-//        });
-
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -185,96 +168,18 @@ public  class DonatorDetailsFragment extends Fragment {
                 setButtonsToViewMode();
             }
         });
-
-//        mDeleteButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                onDeleteDonatorClick();
-//            }
-//        });
-
-//        mDonateButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                onDonateClick();
-//            }
-//        });
     }
 
-    private void setButtonsToEditMode(){
-        mSaveButton.setVisibility(View.VISIBLE);
-        mEditButton.setVisibility(View.INVISIBLE);
-        mDeleteButton.setVisibility(View.INVISIBLE);
-    }
     private void setButtonsToViewMode(){
         mSaveButton.setVisibility(View.INVISIBLE);
         mEditButton.setVisibility(View.VISIBLE);
         mDeleteButton.setVisibility(View.VISIBLE);
     }
 
-    public void onDeleteDonatorClick(){
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        builder.setMessage(R.string.deleteDonator)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        mydb.deleteDonator(id_To_Update);
-                        Toast.makeText(getActivity().getApplicationContext(), "Deleted Successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
-                        startActivity(intent);  // back to main activity
-                    }
-                })
-                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-                    }
-                });
-        AlertDialog d = builder.create();
-        d.setTitle("Are you sure?");
-        d.show();
-
-    }
-
-    public void onDonateClick(){
-
-        Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonateActivity.class);
-        startActivity(intent);
-    }
-
-    public void onEditDonatorClick(){
-
-        name.setEnabled(true);
-        name.setFocusableInTouchMode(true);
-        name.setClickable(true);
-        name.setFocusable(true);
-
-
-        phone.setEnabled(true);
-        phone.setFocusableInTouchMode(true);
-        phone.setClickable(true);
-       // phone.setFocusable(true);
-
-        email.setEnabled(true);
-        email.setFocusableInTouchMode(true);
-        email.setClickable(true);
-       // email.setFocusable(true);
-
-        street.setEnabled(true);
-        street.setFocusableInTouchMode(true);
-        street.setClickable(true);
-      //  street.setFocusable(true);
-
-        place.setEnabled(true);
-        place.setFocusableInTouchMode(true);
-        place.setClickable(true);
-     //   place.setFocusable(true);
-
-    }
-
     public void run()     {
 
         int Value = getShownIndex();
+
         if(Value>0){
 
             // Updating a donator
