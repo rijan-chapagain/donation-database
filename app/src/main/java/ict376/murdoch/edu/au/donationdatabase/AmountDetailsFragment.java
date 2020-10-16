@@ -24,6 +24,7 @@ public  class AmountDetailsFragment extends Fragment {
 
     TextView amount ;
     TextView date;
+    private static int donator_id;
 
     int id_To_Update = 0;
 
@@ -37,6 +38,7 @@ public  class AmountDetailsFragment extends Fragment {
         Bundle args = new Bundle();
         args.putInt("index", index);
         f.setArguments(args);
+//        donator_id = id;
 
         return f;
     }
@@ -54,6 +56,7 @@ public  class AmountDetailsFragment extends Fragment {
         }
 
         mLayoutView = inflater.inflate(R.layout.donate_activity_layout, null);
+//        donator_id =
 
         return mLayoutView;
     }
@@ -155,7 +158,7 @@ public  class AmountDetailsFragment extends Fragment {
 
     }
 
-    public void run()     {
+    public void run(){
 
         int Value = getShownIndex();
         if(Value>0){
@@ -172,7 +175,7 @@ public  class AmountDetailsFragment extends Fragment {
         }
         else{
             // inserting a new donated amount
-            if(mydb.insertDonatedAmount(amount.getText().toString(), date.getText().toString())){
+            if(mydb.insertDonatedAmount(amount.getText().toString(), date.getText().toString(), getShownIndex())){
                 Toast.makeText(getActivity().getApplicationContext(), "Donated amount inserted!", Toast.LENGTH_SHORT).show();
             }else{
                 Toast.makeText(getActivity().getApplicationContext(), "Donated amount NOT inserted. ", Toast.LENGTH_SHORT).show();

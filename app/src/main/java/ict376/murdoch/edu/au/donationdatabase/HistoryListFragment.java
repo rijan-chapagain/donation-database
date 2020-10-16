@@ -34,6 +34,7 @@ public class HistoryListFragment extends Fragment {
     Button  mDonateButton;
     private TextView mAmountDonated;
     private ListView obj;
+    private static int id_index;
 
     // Database
     DBHelper mydb = null;
@@ -45,6 +46,7 @@ public class HistoryListFragment extends Fragment {
         Bundle args = new Bundle();
         args.putInt("index", index);
         f.setArguments(args);
+        id_index = index;
 
         return f;
     }
@@ -143,10 +145,10 @@ public class HistoryListFragment extends Fragment {
 
                     Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonateActivity.class);
                     intent.putExtras(dataBundle);   //
+//                    intent.putExtra("donator_id", id_index);
 
                     startActivity(intent);          //
                 }
-
             }
         });
     }
@@ -177,6 +179,7 @@ public class HistoryListFragment extends Fragment {
             Pair<Integer, String> p = (Pair<Integer, String>)mArrayList.get(i);
             array_list.add(p.second);
         }
+
         // Put all the donators in an array
         ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, array_list);
 
@@ -191,7 +194,4 @@ public class HistoryListFragment extends Fragment {
         mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 
     }
-
-
-
 }

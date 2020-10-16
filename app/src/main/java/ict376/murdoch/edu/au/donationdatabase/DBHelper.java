@@ -67,7 +67,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         AMOUNTSDONATED_COLUMN_ID + " integer primary key, " +
                         AMOUNTSDONATED_COLUMN_DATE   + " date, " +
                         AMOUNTSDONATED_COLUMN_AMOUNT_DONATED  + " real," +
-                        AMOUNTSDONATED_COLUMN_DONATOR_ID + " integer not null," +
+                        AMOUNTSDONATED_COLUMN_DONATOR_ID + " integer," +
                         "FOREIGN KEY (" +  AMOUNTSDONATED_COLUMN_DONATOR_ID + ") REFERENCES " + DONATORS_TABLE_NAME + "(" +  DONATORS_COLUMN_ID + "));"
         );
     }
@@ -122,7 +122,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param date
      * @return
      */
-    public boolean insertDonatedAmount  (String amount, String date)
+    public boolean insertDonatedAmount  (String amount, String date, int id)
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -131,6 +131,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         contentValues.put("amount_donated", amount);
         contentValues.put("date", date);
+        contentValues.put(AMOUNTSDONATED_COLUMN_DONATOR_ID, id);
+
 
         // Insert the row
         db.insert("amountsDonated", null, contentValues);

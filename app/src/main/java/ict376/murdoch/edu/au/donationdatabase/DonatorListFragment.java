@@ -187,7 +187,4 @@ public class DonatorListFragment extends Fragment {
         mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 
     }
-
-
-
 }
