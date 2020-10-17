@@ -28,31 +28,5 @@ public class DisplayNewDonatorActivity extends Activity {
         }else{
             donatorDetailsFragment = (DonatorDetailsFragment) getFragmentManager().findFragmentById(R.id.donatordetails_fragment_container);
         }
-
-
     }
-
-    /*
-    public void onDeleteContactClick(View v){
-
-        donatorDetailsFragment.onDeleteContactClick(v);
-
-
-    }
-
-    public void onEditContactClick(View v){
-
-        donatorDetailsFragment.onEditContactClick(v);
-
-    }
-
-    public void run(View view)    {
-
-        donatorDetailsFragment.run(view);
-
-        //Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-        //startActivity(intent);
-
-    }
-    */
 }
