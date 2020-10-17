@@ -92,7 +92,7 @@ public class HistoryListFragment extends Fragment {
                 if (mDualPane) {
 
                     // display on the same Activity
-                    AmountDetailsFragment details = AmountDetailsFragment.newInstance(id_To_Search);
+                    AmountDetailsFragment details = AmountDetailsFragment.newInstance(id_To_Search, id_index);
 
                     // Execute a transaction, replacing any existing fragment
                     // with this one inside the frame.
@@ -127,7 +127,7 @@ public class HistoryListFragment extends Fragment {
                 if (mDualPane) {
 
                     // display on the same Activity
-                    AmountDetailsFragment details = AmountDetailsFragment.newInstance(0);
+                    AmountDetailsFragment details = AmountDetailsFragment.newInstance(0, id_index);
 
                     // Execute a transaction, replacing any existing fragment
                     // with this one inside the frame.
@@ -145,7 +145,7 @@ public class HistoryListFragment extends Fragment {
 
                     Intent intent = new Intent(getActivity().getApplicationContext(), DisplayDonateActivity.class);
                     intent.putExtras(dataBundle);   //
-//                    intent.putExtra("donator_id", id_index);
+                    intent.putExtra("donator_id", id_index);
 
                     startActivity(intent);          //
                 }

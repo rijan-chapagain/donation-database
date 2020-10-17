@@ -31,14 +31,14 @@ public  class AmountDetailsFragment extends Fragment {
     Button mBackButton;
     Button mSubmitButton;
 
-    public static AmountDetailsFragment newInstance(int index) {
+    public static AmountDetailsFragment newInstance(int index, int id) {
 
         AmountDetailsFragment f = new AmountDetailsFragment();
 
         Bundle args = new Bundle();
         args.putInt("index", index);
         f.setArguments(args);
-//        donator_id = id;
+        donator_id = id;
 
         return f;
     }
@@ -75,7 +75,7 @@ public  class AmountDetailsFragment extends Fragment {
         mydb = new DBHelper(getActivity());
 
         mSubmitButton = (Button)mLayoutView.findViewById(R.id.button_submit);
-        mBackButton = (Button)mLayoutView.findViewById(R.id.button_back);
+//        mBackButton = (Button)mLayoutView.findViewById(R.id.button_back);
 
         int Value = getShownIndex();
         if(Value>0){
@@ -112,22 +112,25 @@ public  class AmountDetailsFragment extends Fragment {
 
         // setting the listeners for the buttons
         mSubmitButton   = (Button) getActivity().findViewById(R.id.button_submit);
-        mBackButton = (Button) getActivity().findViewById(R.id.button_back);
+//        mBackButton = (Button) getActivity().findViewById(R.id.button_back);
 
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 run();
                 onSubmitButtonCLick();
+
+                Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
+                startActivity(intent);
             }
         });
 
-        mBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackButtonClick();
-            }
-        });
+//        mBackButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onBackButtonClick();
+//            }
+//        });
     }
 
     public  void onSubmitButtonCLick() {

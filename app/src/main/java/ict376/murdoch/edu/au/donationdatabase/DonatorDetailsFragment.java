@@ -88,11 +88,10 @@ public  class DonatorDetailsFragment extends Fragment {
         mydb = new DBHelper(getActivity());
 
         mSaveButton = (Button)mLayoutView.findViewById(R.id.button1);
-        mEditButton = (Button)mLayoutView.findViewById(R.id.button_edit);
-        mEditButton.setVisibility(View.INVISIBLE);
+//        mEditButton.setVisibility(View.INVISIBLE);
 
-        mDeleteButton = (Button)mLayoutView.findViewById(R.id.button_delete);
-        mDeleteButton.setVisibility(View.INVISIBLE);
+//        mDeleteButton = (Button)mLayoutView.findViewById(R.id.button_delete);
+//        mDeleteButton.setVisibility(View.INVISIBLE);
 
         //  Bundle extras = getIntent().getExtras();
 
@@ -155,25 +154,28 @@ public  class DonatorDetailsFragment extends Fragment {
         }
 
         // setting the listeners for the buttons
-        mEditButton   = (Button) getActivity().findViewById(R.id.button_edit);
         mSaveButton   = (Button) getActivity().findViewById(R.id.button1);
-        mDeleteButton = (Button) getActivity().findViewById(R.id.button_delete);
+//        mDeleteButton = (Button) getActivity().findViewById(R.id.button_delete);
         mDonateButton = (Button) getActivity().findViewById(R.id.button_donate);
-        mBackButton = (Button) getActivity().findViewById(R.id.button_back);
+//        mBackButton = (Button) getActivity().findViewById(R.id.button_back);
 
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 run();
                 setButtonsToViewMode();
+
+                Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
+                startActivity(intent);
             }
         });
+
     }
 
     private void setButtonsToViewMode(){
         mSaveButton.setVisibility(View.INVISIBLE);
-        mEditButton.setVisibility(View.VISIBLE);
-        mDeleteButton.setVisibility(View.VISIBLE);
+//        mEditButton.setVisibility(View.VISIBLE);
+//        mDeleteButton.setVisibility(View.VISIBLE);
     }
 
     public void run()     {
